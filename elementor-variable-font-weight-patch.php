@@ -142,6 +142,14 @@ function evfwp_get_active_kit() {
 
 		return $kit;
 	} catch ( \Throwable $e ) {
+		if (
+			defined( 'WP_DEBUG' ) && WP_DEBUG &&
+			defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG
+		) {
+			error_log(
+				'Elementor Variable Font Weight Patch: ' . $e->getMessage()
+			);
+		}
 		return null;
 	}
 }
@@ -224,6 +232,14 @@ function evfwp_collect_weight_variables( $kit ) {
 		try {
 			$items = $kit->get_settings( $group_key );
 		} catch ( \Throwable $e ) {
+			if (
+				defined( 'WP_DEBUG' ) && WP_DEBUG &&
+				defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG
+			) {
+				error_log(
+					'Elementor Variable Font Weight Patch: ' . $e->getMessage()
+				);
+			}
 			continue;
 		}
 
